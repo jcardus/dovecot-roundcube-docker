@@ -18,6 +18,7 @@ services:
       - ROUNDCUBEMAIL_DEFAULT_PORT=31143
       - ROUNDCUBEMAIL_SMTP_SERVER=${ROUNDCUBEMAIL_SMTP_SERVER}
       - ROUNDCUBEMAIL_COMPOSER_PLUGINS=radialapps/roundcube-oidc
+      - ROUNDCUBEMAIL_PLUGINS=roundcube_oidc
     ports:
       - "80:80"
     depends_on:
