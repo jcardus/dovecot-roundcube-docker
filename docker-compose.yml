@@ -3,7 +3,7 @@ services:
     image: dovecot/dovecot
     container_name: dovecot
     volumes:
-      - ./dovecot/config/conf.d:/etc/dovecot/conf.d
+      - ./dovecot/conf.d:/etc/dovecot/conf.d
       - ./dovecot/mail:/var/mail
     environment:
       - USER_PASSWORD=${USER_PASSWORD}
