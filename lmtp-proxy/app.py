@@ -11,6 +11,7 @@ def deliver_email():
         return jsonify({"error": "Unauthorized"}), 401    
 
     try:
+        app.logger.info(f"Delivering email from {request.headers.get('from')} to {request.headers.get('to')}")
         with smtplib.LMTP('dovecot', 24) as server:
             server.sendmail(
                 request.headers.get('from'), 

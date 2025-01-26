@@ -8,7 +8,9 @@ export default {
           headers: {
             ...message.headers,
             'Content-Type': 'text/plain',
-            'X-API-Key': env.API_KEY
+            'X-API-Key': env.API_KEY,
+            'from': message.from,
+            'to': message.to,
           },
           body: message.raw          
         });
