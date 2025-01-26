@@ -11,10 +11,6 @@ def deliver_email():
     subject = data.get('subject', 'No Subject')
     body = data.get('body', '')
 
-    app.logger.info(f"Received request from {request.remote_addr}")
-    app.logger.info(f"Headers: {request.headers}")
-    app.logger.info(f"Body: {request.get_data().decode('utf-8')}")
-
     if not recipient:
         return jsonify({"error": "Recipient is required"}), 400
 
