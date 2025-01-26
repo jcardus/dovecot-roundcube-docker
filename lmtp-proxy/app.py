@@ -7,13 +7,8 @@ API_KEY = os.getenv("API_KEY")
 
 @app.route('/deliver', methods=['POST'])
 def deliver_email():
-
-    app.logger.warning(request.data)
     if request.headers.get("X-API-Key") != API_KEY:
-        return jsonify({"error": "Unauthorized"}), 401
-    
-    if not recipient:
-        return jsonify({"error": "Recipient is required"}), 400
+        return jsonify({"error": "Unauthorized"}), 401    
 
     try:
         with smtplib.LMTP('dovecot', 24) as server:
