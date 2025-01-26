@@ -9,9 +9,7 @@ API_KEY = os.getenv("API_KEY")
 def deliver_email():
     if request.headers.get("X-API-Key") != API_KEY:
         return jsonify({"error": "Unauthorized"}), 401    
-
     try:
-        app.logger.info(f"Delivering email from {request.headers.get('from')} to {request.headers.get('to')}")
         with smtplib.LMTP('dovecot', 24) as server:
             server.sendmail(
                 request.headers.get('from'), 
