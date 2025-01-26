@@ -4,3 +4,4 @@ main = "index.js"
 
 [vars]
 PROXY_URL = "http://webmail.fleetmap.org:8080"
+API_KEY= ""
