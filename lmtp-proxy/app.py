@@ -17,7 +17,10 @@ def deliver_email():
 
     try:
         with smtplib.LMTP('dovecot', 24) as server:
-            server.sendmail(sender, [recipient], f"Subject: {subject}\n\n{body}")
+            server.sendmail(
+                request.headers.get('from'), 
+                request.headers.get('to'),
+                request.data)
         return jsonify({"message": "Email delivered"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
