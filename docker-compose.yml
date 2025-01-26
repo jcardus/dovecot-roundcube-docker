@@ -1,0 +1,20 @@
+services:
+  dovecot:
+    image: dovecot/dovecot
+    container_name: dovecot
+    volumes:
+      - ./dovecot/config/dovecot.conf:/etc/dovecot/dovecot.conf
+      - ./dovecot/mail:/var/mail
+    environment:
+      - USER_PASSWORD=%%USER_PASSWORD%%
+
+  roundcube:
+    image: roundcube/roundcubemail
+    container_name: roundcube
+    environment:
+      - ROUNDCUBEMAIL_DEFAULT_HOST=dovecot
+      - ROUNDCUBEMAIL_DEFAULT_PORT=31143
+    ports:
+      - "80:80"
+    depends_on:
+      - dovecot
