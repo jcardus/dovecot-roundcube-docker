@@ -3,5 +3,6 @@ name = "email-forward-worker"
 main = "index.js"
 
 [vars]
-PROXY_URL = "http://webmail.fleetmap.org:8080"
-API_KEY= ""
+# PROXY_URL = http://webmail.fleetmap.org:8080
+# API_KEY = 
+# use "wrangler secret put" to set these vars before deploying 
