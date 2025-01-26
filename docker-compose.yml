@@ -18,3 +18,12 @@ services:
       - "80:80"
     depends_on:
       - dovecot
+
+  lmtp-proxy:
+    build:
+      context: ./lmtp-proxy
+    container_name: lmtp-proxy
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dovecot
