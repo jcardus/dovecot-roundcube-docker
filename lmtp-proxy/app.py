@@ -11,14 +11,13 @@ def deliver_email():
         return jsonify({"error": "Unauthorized"}), 401    
     try:
         with smtplib.LMTP('dovecot', 24) as server:
-            server.sendmail(
+            return server.sendmail(
                 request.headers.get('from'), 
                 request.headers.get('to'),
-                request.data)
-        return jsonify({"message": "Email delivered"}), 200
+                request.data), 200
     except Exception as e:
         app.logger.exception(e)
-        return jsonify({"error": str(e)}), 500
+        return str(e), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
