@@ -7,8 +7,8 @@ export default {
           method: "POST",
           headers: {
             ...message.headers,
-            "Content-Type": "application/text",
-            "X-API-Key": env.API_KEY,
+            'Content-Type': 'text/plain',
+            'X-API-Key': env.API_KEY
           },
           body: message.raw          
         });
