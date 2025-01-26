@@ -8,7 +8,7 @@ API_KEY = os.getenv("API_KEY")
 @app.route('/deliver', methods=['POST'])
 def deliver_email():
     if request.headers.get("X-API-Key") != API_KEY:
-        return jsonify({"error": request.body}), 401
+        return jsonify({"error": request.data}), 401
 
     if request.headers.get("X-API-Key") != API_KEY:
         return jsonify({"error": "Unauthorized"}), 401
