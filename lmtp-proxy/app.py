@@ -19,7 +19,7 @@ def deliver_email():
         return jsonify({"message": "Email delivered"}), 200
     except Exception as e:
         app.logger.error(f"Error delivering email: {str(e)}")
-        app.logger.error(f"Error delivering email: {str(e)}")
+        app.logger.error(e)
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
