@@ -1,0 +1,6 @@
+compatibility_date = "2020-01-26"
+name = "email-forward-worker"
+main = "index.js"
+
+[vars]
+PROXY_URL = "http://webmail.fleetmap.org:8080"

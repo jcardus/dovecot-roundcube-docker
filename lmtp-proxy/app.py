@@ -7,7 +7,7 @@ API_KEY = os.getenv("API_KEY")
 
 @app.route('/deliver', methods=['POST'])
 def deliver_email():
-    data = request.json
+    data = request.text
     sender = data.get('from', 'noreply@example.com')
     recipient = data.get('to', '')
     subject = data.get('subject', 'No Subject')
