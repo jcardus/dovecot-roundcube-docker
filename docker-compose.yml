@@ -11,6 +11,8 @@ services:
   roundcube:
     image: roundcube/roundcubemail
     container_name: roundcube
+    volumes:
+      - ./roundcube/config:/var/roundcube/config
     environment:
       - ROUNDCUBEMAIL_DEFAULT_HOST=dovecot
       - ROUNDCUBEMAIL_DEFAULT_PORT=31143
