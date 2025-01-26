@@ -6,7 +6,7 @@ services:
       - ./dovecot/config/dovecot.conf:/etc/dovecot/dovecot.conf
       - ./dovecot/mail:/var/mail
     environment:
-      - USER_PASSWORD=%%USER_PASSWORD%%
+      - USER_PASSWORD=${USER_PASSWORD}
 
   roundcube:
     image: roundcube/roundcubemail
