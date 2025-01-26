@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 import smtplib
+import os
 
 app = Flask(__name__)
+API_KEY = os.getenv("API_KEY")
 
 @app.route('/deliver', methods=['POST'])
 def deliver_email():
@@ -11,6 +13,9 @@ def deliver_email():
     subject = data.get('subject', 'No Subject')
     body = data.get('body', '')
 
+    if request.headers.get("X-API-Key") != API_KEY:
+        return jsonify({"error": "Unauthorized"}), 401
+    
     if not recipient:
         return jsonify({"error": "Recipient is required"}), 400
 
