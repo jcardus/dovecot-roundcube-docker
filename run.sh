@@ -1,5 +1,5 @@
 docker compose up -d
-until curl --silent --fail http://localhost; do
+until curl --fail -o /dev/null http://localhost; do
   echo "Waiting for Roundcube to be ready..."
   sleep 2  # Wait for 2 seconds before retrying
 done
