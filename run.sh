@@ -4,3 +4,4 @@ until curl --silent --fail -o /dev/null http://localhost; do
   sleep 2  # Wait for 2 seconds before retrying
 done
 docker cp ./roundcube/config.php roundcube:/var/www/html/plugins/roundcube_oidc/config.inc.php 
+docker compose restart
