@@ -72,4 +72,4 @@ jobs:
           SCRIPT
           chmod +x deploy_script.sh
           
-          ssh root@$VPS_IP 'bash -s' < deploy_script.sh
+          ssh root@$SERVER 'bash -s' < deploy_script.sh
