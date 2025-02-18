@@ -28,8 +28,8 @@ jobs:
           #!/bin/bash
           sudo apt install unzip -y
           export ADMIN_PASSWD="${{ vars.ADMIN_PASSWD }}"
-          export PROJECT_DIR=${{ github.repository.name }}
           export GITHUB_REPOSITORY="${{ github.repository }}"
+          export PROJECT_DIR="${GITHUB_REPOSITORY##*/}"
           export SMTP_PASSWORD="${{vars.SMTP_PASSWORD}}"
           export SMTP_USER_NAME="${{vars.SMTP_USER_NAME}}"
           export MAIL_SMTP_FROM="${{vars.MAIL_SMTP_FROM}}"
