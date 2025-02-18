@@ -37,12 +37,15 @@ jobs:
           export OPEN_ID_CLIENT="${{vars.OPEN_ID_CLIENT}}"
           export AUTH_DOMAIN="${{vars.AUTH_DOMAIN}}"
           export DOVE_ADM_PASSWORD="${{vars.DOVE_ADM_PASSWORD}}"
+          export USER_PASSWORD="${{vars.DOVE_ADM_PASSWORD}}"
 
           set -e  # Exit on errors
           echo "PROJECT_DIR=$PROJECT_DIR"
           echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
           echo "ADMIN_PASSWD=$ADMIN_PASSWD"
           echo "SMTP_PASSWORD=$SMTP_PASSWORD"
+          echo "DOVE_ADM_PASSWORD=$DOVE_ADM_PASSWORD"
+          echo "USER_PASSWORD=$USER_PASSWORD"
           # Check if the directory exists
           if [ ! -d "$PROJECT_DIR" ]; then
             echo "Directory does not exist. Cloning the repository..."
@@ -62,6 +65,7 @@ jobs:
          
           echo "running sed"
           sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" roundcube/config.php    
+          sed -i "s/%%oidc_secret%%/$OPEN_ID_SECRET/g" roundcube/config.php              
           sed -i "s/%%doveadm_password%%/$DOVE_ADM_PASSWORD/g" dovecot/conf.d/dovecot.conf    
           
           echo "restart"

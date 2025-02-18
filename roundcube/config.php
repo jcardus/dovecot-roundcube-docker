@@ -20,7 +20,7 @@ $config['oidc_url'] = 'https://auth.pinme.io';
 $config['oidc_client'] = '%%client_id%%';
 
 // Client secret corresponding to the given client ID
-$config['oidc_secret'] = 'my_secret';
+$config['oidc_secret'] = '%%oidc_secret%%';
 
 // OIDC scope
 $config['oidc_scope'] = 'openid';
