@@ -57,18 +57,10 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
 
-          
-          echo "running sed"
-          sed -i "s/%%admin_passwd%%/$ADMIN_PASSWD/g" odoo/odoo.conf    
-          sed -i "s|%%SMTP_PASSWORD%%|$SMTP_PASSWORD|g" odoo/odoo.conf  
-          sed -i "s/%%SMTP_USER_NAME%%/$SMTP_USER_NAME/g" odoo/odoo.conf  
-          sed -i "s/%%MAIL_SMTP_FROM%%/$MAIL_SMTP_FROM/g" odoo/odoo.conf
-          echo "copy files"
-          
+         
           echo "restart"
-          docker-compose down
-          docker-compose up -d
-          docker cp ./18.0/odoo odoo:/usr/lib/python3/dist-packages
+          ./run.sh
+          
           SCRIPT
           chmod +x deploy_script.sh
           
