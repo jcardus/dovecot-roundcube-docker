@@ -34,6 +34,7 @@ jobs:
           export SMTP_USER_NAME="${{vars.SMTP_USER_NAME}}"
           export MAIL_SMTP_FROM="${{vars.MAIL_SMTP_FROM}}"
           export OPEN_ID_CLIENT_SECRET="${{vars.OPEN_ID_CLIENT_SECRET}}"
+          export OPEN_ID_CLIENT="${{vars.OPEN_ID_CLIENT}}"
           export AUTH_DOMAIN="${{vars.AUTH_DOMAIN}}"
 
           set -e  # Exit on errors
@@ -58,9 +59,16 @@ jobs:
           git reset --hard origin/main
 
          
+          echo "running sed"
+          sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" odoo/odoo.conf    
+          sed -i "s|%%SMTP_PASSWORD%%|$SMTP_PASSWORD|g" odoo/odoo.conf  
+          sed -i "s/%%SMTP_USER_NAME%%/$SMTP_USER_NAME/g" odoo/odoo.conf  
+          sed -i "s/%%MAIL_SMTP_FROM%%/$MAIL_SMTP_FROM/g" odoo/odoo.conf
+          echo "copy files"
+
           echo "restart"
           ./run.sh
-          
+
           SCRIPT
           chmod +x deploy_script.sh
           

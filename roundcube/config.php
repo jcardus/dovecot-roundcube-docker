@@ -17,7 +17,7 @@ $config['oidc_config_master_user'] = '';
 $config['oidc_url'] = 'https://auth.pinme.io';
 
 // Client ID already registered on the provider
-$config['oidc_client'] = 'client_id';
+$config['oidc_client'] = '%%client_id%%';
 
 // Client secret corresponding to the given client ID
 $config['oidc_secret'] = 'my_secret';
