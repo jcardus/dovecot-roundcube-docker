@@ -36,6 +36,7 @@ jobs:
           export OPEN_ID_CLIENT_SECRET="${{vars.OPEN_ID_CLIENT_SECRET}}"
           export OPEN_ID_CLIENT="${{vars.OPEN_ID_CLIENT}}"
           export AUTH_DOMAIN="${{vars.AUTH_DOMAIN}}"
+          export DOVE_ADM_PASSWORD="${{secrets.DOVE_ADM_PASSWORD}}"
 
           set -e  # Exit on errors
           echo "PROJECT_DIR=$PROJECT_DIR"
@@ -61,7 +62,8 @@ jobs:
          
           echo "running sed"
           sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" roundcube/config.php    
-
+          sed -i "s/%%doveadm_password%%/$DOVE_ADM_PASSWORD/g" dovecot/conf.d/dovecot.conf    
+          
           echo "restart"
           ./run.sh
 
