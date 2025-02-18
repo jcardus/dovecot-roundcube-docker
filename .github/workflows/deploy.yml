@@ -66,7 +66,8 @@ jobs:
           echo "running sed"
           sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" roundcube/config.php    
           sed -i "s/%%oidc_secret%%/$OPEN_ID_SECRET/g" roundcube/config.php              
-          sed -i "s/%%doveadm_password%%/$DOVE_ADM_PASSWORD/g" dovecot/conf.d/dovecot.conf    
+          sed -i "s/%%master_password%%/$DOVE_ADM_PASSWORD/g" roundcube/config.php       
+          sed -i "s/%%doveadm_password%%/$DOVE_ADM_PASSWORD/g" dovecot/conf.d/dovecot.conf   
           
           echo "restart"
           ./run.sh

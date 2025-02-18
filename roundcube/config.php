@@ -3,14 +3,7 @@ $config['smtp_user'] = '';
 $config['smtp_pass'] = '';
 
 
-// Master user separator for Dovecot
-// https://doc.dovecot.org/configuration_manual/authentication/master_users/
-// https://docs.iredmail.org/dovecot.master.user.html
-$config['oidc_master_user_separator'] = '*';
-
-// Master user to append after separator
-// Set to blank to not use a master user
-$config['oidc_config_master_user'] = '';
+$config['oidc_imap_master_password'] = '%%master_password%%';
 
 // --------------- Provider ------------------
 // URL for OIDC
