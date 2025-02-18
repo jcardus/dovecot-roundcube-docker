@@ -60,11 +60,7 @@ jobs:
 
          
           echo "running sed"
-          sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" odoo/odoo.conf    
-          sed -i "s|%%SMTP_PASSWORD%%|$SMTP_PASSWORD|g" odoo/odoo.conf  
-          sed -i "s/%%SMTP_USER_NAME%%/$SMTP_USER_NAME/g" odoo/odoo.conf  
-          sed -i "s/%%MAIL_SMTP_FROM%%/$MAIL_SMTP_FROM/g" odoo/odoo.conf
-          echo "copy files"
+          sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" roundcube/config.php    
 
           echo "restart"
           ./run.sh
