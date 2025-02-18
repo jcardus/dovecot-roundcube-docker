@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVER: mail.fleetmap.org
-      PROJECT_DIR: github.repository.name
+      PROJECT_DIR: ${{ github.repository.name }}
 
     steps:
       - uses: actions/checkout@v4
