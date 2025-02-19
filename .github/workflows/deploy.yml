@@ -39,6 +39,7 @@ jobs:
           export ROUNDCUBEMAIL_SMTP_SERVER="${{vars.ROUNDCUBEMAIL_SMTP_SERVER}}"
           export SMTP_USER="${{vars.SMTP_USER}}"
           export SMTP_PASS="${{vars.SMTP_PASS}}"
+          export API_KEY="${{ars.DOVE_ADM_PASSWORD}}"
 
           set -e  # Exit on errors
           echo "PROJECT_DIR=$PROJECT_DIR"
