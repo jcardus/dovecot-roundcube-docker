@@ -30,8 +30,6 @@ jobs:
           export ADMIN_PASSWD="${{ vars.ADMIN_PASSWD }}"
           export GITHUB_REPOSITORY="${{ github.repository }}"
           export PROJECT_DIR="${GITHUB_REPOSITORY##*/}"
-          export SMTP_PASSWORD="${{vars.SMTP_PASSWORD}}"
-          export SMTP_USER_NAME="${{vars.SMTP_USER_NAME}}"
           export MAIL_SMTP_FROM="${{vars.MAIL_SMTP_FROM}}"
           export OPEN_ID_SECRET="${{vars.OPEN_ID_SECRET}}"
           export OPEN_ID_CLIENT="${{vars.OPEN_ID_CLIENT}}"
