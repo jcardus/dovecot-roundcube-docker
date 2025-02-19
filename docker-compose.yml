@@ -20,7 +20,7 @@ services:
       - ROUNDCUBEMAIL_COMPOSER_PLUGINS=radialapps/roundcube-oidc
       - ROUNDCUBEMAIL_PLUGINS=roundcube_oidc
     ports:
-      - "80:80"
+      - "8081:80"
     depends_on:
       - dovecot
 
