@@ -38,6 +38,9 @@ jobs:
           export AUTH_DOMAIN="${{vars.AUTH_DOMAIN}}"
           export DOVE_ADM_PASSWORD="${{vars.DOVE_ADM_PASSWORD}}"
           export USER_PASSWORD="${{vars.DOVE_ADM_PASSWORD}}"
+          export ROUNDCUBEMAIL_SMTP_SERVER="${{vars.ROUNDCUBEMAIL_SMTP_SERVER}}"
+          export SMTP_USER="${{vars.SMTP_USER}}"
+          export SMTP_PASS="${{vars.SMTP_PASS}}"
 
           set -e  # Exit on errors
           echo "PROJECT_DIR=$PROJECT_DIR"
@@ -64,6 +67,8 @@ jobs:
 
          
           echo "running sed"
+          sed -i "s/%%smtp_user%%/$SMTP_USER/g" roundcube/config.php    
+          sed -i "s/%%smtp_pass%%/$SMTP_PASS/g" roundcube/config.php    
           sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" roundcube/config.php    
           sed -i "s/%%oidc_secret%%/$OPEN_ID_SECRET/g" roundcube/config.php              
           sed -i "s/%%master_password%%/$DOVE_ADM_PASSWORD/g" roundcube/config.php       

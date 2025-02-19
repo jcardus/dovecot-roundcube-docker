@@ -1,6 +1,6 @@
 <?php
-$config['smtp_user'] = '';
-$config['smtp_pass'] = '';
+$config['smtp_user'] = '%%smtp_user%%';
+$config['smtp_pass'] = '%%smtp_pass%%';
 
 
 $config['oidc_imap_master_password'] = '%%master_password%%';
