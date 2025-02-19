@@ -33,7 +33,7 @@ jobs:
           export SMTP_PASSWORD="${{vars.SMTP_PASSWORD}}"
           export SMTP_USER_NAME="${{vars.SMTP_USER_NAME}}"
           export MAIL_SMTP_FROM="${{vars.MAIL_SMTP_FROM}}"
-          export OPEN_ID_CLIENT_SECRET="${{vars.OPEN_ID_CLIENT_SECRET}}"
+          export OPEN_ID_SECRET="${{vars.OPEN_ID_SECRET}}"
           export OPEN_ID_CLIENT="${{vars.OPEN_ID_CLIENT}}"
           export AUTH_DOMAIN="${{vars.AUTH_DOMAIN}}"
           export DOVE_ADM_PASSWORD="${{vars.DOVE_ADM_PASSWORD}}"
