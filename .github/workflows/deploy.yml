@@ -64,8 +64,9 @@ jobs:
           git reset --hard origin/main
 
          
-          echo "running sed"
+          echo "running sed smtp_user"
           sed -i "s/%%smtp_user%%/$SMTP_USER/g" roundcube/config.php    
+          echo "running sed smtp_pass"
           sed -i "s/%%smtp_pass%%/$SMTP_PASS/g" roundcube/config.php    
           sed -i "s/%%client_id%%/$OPEN_ID_CLIENT/g" roundcube/config.php    
           sed -i "s/%%oidc_secret%%/$OPEN_ID_SECRET/g" roundcube/config.php              
