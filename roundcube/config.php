@@ -16,7 +16,7 @@ $config['oidc_client'] = '%%client_id%%';
 $config['oidc_secret'] = '%%oidc_secret%%';
 
 // OIDC scope
-$config['oidc_scope'] = 'email';
+$config['oidc_scope'] = 'openid email';
 
 // -------------- User Fields -----------------
 // Field for login UID. This may be an email ID
