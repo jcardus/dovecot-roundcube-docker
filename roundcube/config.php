@@ -33,3 +33,6 @@ $config['oidc_field_server'] = 'imap_server';
 // Any errors will be reported as $ERROR
 $config['oidc_login_page'] = '';
 
+$config['oidc_log_enabled'] = true;  // Enable plugin-specific logging
+
+
