@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
+  <Response>
+    <Account>
+      <AccountType>email</AccountType>
+      <Action>settings</Action>
+      <Protocol>
+        <Type>IMAP</Type>
+        <Server>mail.fleetmap.org</Server>
+        <Port>31143</Port>
+        <LoginName>%EMAILADDRESS%</LoginName>
+        <SSL>0</SSL>
+      </Protocol>
+      <Protocol>
+        <Type>SMTP</Type>
+        <Server>email-smtp.us-east-1.amazonaws.com</Server>
+        <Port>465</Port>
+        <LoginName>%EMAILADDRESS%</LoginName>
+        <SSL>1</SSL>
+      </Protocol>
+    </Account>
+  </Response>
+</Autodiscover>
