@@ -4,11 +4,12 @@ services:
     container_name: dovecot
     volumes:
       - ./dovecot/conf.d:/etc/dovecot/conf.d
-      - ../mail:/srv/vmail
+      - ../vmail:/srv/vmail
     environment:
       - USER_PASSWORD=${USER_PASSWORD}
     ports:
       - "31143:31143"
+    user: root
 
   roundcube:
     image: roundcube/roundcubemail
