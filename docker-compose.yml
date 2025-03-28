@@ -4,7 +4,8 @@ services:
     container_name: dovecot
     volumes:
       - ./dovecot/conf.d:/etc/dovecot/conf.d
-      - ./dovecot/mail:/var/mail
+      - ../mail:/var/mail
+      - ../users:/etc/dovecot/users 
     environment:
       - USER_PASSWORD=${USER_PASSWORD}
     ports:
