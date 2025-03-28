@@ -22,3 +22,5 @@ $config['oidc_scope'] = 'openid email';
 // Field for login UID. This may be an email ID
 $config['oidc_field_uid'] = 'email';
 
+$config['password_algorithm'] = 'dovecot';
+
