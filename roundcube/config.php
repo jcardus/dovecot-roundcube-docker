@@ -24,3 +24,5 @@ $config['oidc_field_uid'] = 'email';
 
 $config['password_algorithm'] = 'dovecot';
 
+$config['plugins'] = array('password');
+
