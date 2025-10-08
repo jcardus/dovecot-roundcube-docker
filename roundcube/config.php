@@ -27,3 +27,4 @@ $config['plugins'] = array('password');
 $config['password_driver'] = 'dovecot_passwdfile';
 $config['password_dovecot_passwdfile_path'] = '/srv/vmail/passwd';
 $config['password_algorithm'] = 'sha512-crypt';
+$config['password_algorithm_prefix'] = '{SHA512-CRYPT}';
