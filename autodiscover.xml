@@ -7,9 +7,9 @@
       <Protocol>
         <Type>IMAP</Type>
         <Server>mail.fleetmap.org</Server>
-        <Port>31143</Port>
+        <Port>993</Port>
         <LoginName>%EMAILADDRESS%</LoginName>
-        <SSL>0</SSL>
+        <SSL>1</SSL>
       </Protocol>
       <Protocol>
         <Type>SMTP</Type>

@@ -31,9 +31,16 @@ environment variable:
 SMTP_USER=your-smtp-user ./generate-ios-profile.sh user@fleetmap.org "User Name"
 ```
 
+For AWS SES SMTP, use the SES SMTP username and password. This embeds the SMTP
+password in the `.mobileconfig`, so treat the generated file as a secret:
+
+```sh
+SMTP_USER=your-ses-smtp-user SMTP_PASS='your-ses-smtp-password' ./generate-ios-profile.sh user@fleetmap.org "User Name"
+```
+
 The default profile matches the current `autodiscover.xml`:
 
 ```text
-IMAP: mail.fleetmap.org:31143, SSL off
+IMAP: mail.fleetmap.org:993, SSL on
 SMTP: email-smtp.us-east-1.amazonaws.com:465, SSL on
 ```

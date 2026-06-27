@@ -5,10 +5,12 @@ services:
     volumes:
       - ./dovecot/conf.d:/etc/dovecot/conf.d
       - ../vmail:/srv/vmail
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     environment:
       - USER_PASSWORD=${USER_PASSWORD}
     ports:
       - "31143:31143"
+      - "993:993"
     user: root
 
   roundcube:

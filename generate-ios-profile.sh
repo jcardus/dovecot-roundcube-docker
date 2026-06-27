@@ -8,21 +8,23 @@ EMAIL="${1:-}"
 FULL_NAME="${2:-$EMAIL}"
 OUT_DIR="${OUT_DIR:-ios-profiles}"
 IMAP_HOST="${IMAP_HOST:-mail.fleetmap.org}"
-IMAP_PORT="${IMAP_PORT:-31143}"
-IMAP_SSL="${IMAP_SSL:-false}"
+IMAP_PORT="${IMAP_PORT:-993}"
+IMAP_SSL="${IMAP_SSL:-true}"
 IMAP_USER="${IMAP_USER:-$EMAIL}"
+IMAP_PASS="${IMAP_PASS:-}"
 SMTP_HOST="${SMTP_HOST:-email-smtp.us-east-1.amazonaws.com}"
 SMTP_PORT="${SMTP_PORT:-465}"
 SMTP_SSL="${SMTP_SSL:-true}"
 SMTP_USER="${SMTP_USER:-$EMAIL}"
+SMTP_PASS="${SMTP_PASS:-}"
 
 if [ -z "$EMAIL" ]; then
   echo "Usage: $0 user@example.com [Full Name]"
   echo
   echo "Optional environment variables:"
   echo "  OUT_DIR=ios-profiles"
-  echo "  IMAP_HOST=mail.fleetmap.org IMAP_PORT=31143 IMAP_SSL=false IMAP_USER=user@example.com"
-  echo "  SMTP_HOST=email-smtp.us-east-1.amazonaws.com SMTP_PORT=465 SMTP_SSL=true SMTP_USER=user@example.com"
+  echo "  IMAP_HOST=mail.fleetmap.org IMAP_PORT=993 IMAP_SSL=true IMAP_USER=user@example.com IMAP_PASS=secret"
+  echo "  SMTP_HOST=email-smtp.us-east-1.amazonaws.com SMTP_PORT=465 SMTP_SSL=true SMTP_USER=ses-smtp-user SMTP_PASS=secret"
   exit 1
 fi
 
@@ -69,8 +71,22 @@ email_xml=$(xml_escape "$EMAIL")
 full_name_xml=$(xml_escape "$FULL_NAME")
 imap_host_xml=$(xml_escape "$IMAP_HOST")
 imap_user_xml=$(xml_escape "$IMAP_USER")
+imap_pass_xml=$(xml_escape "$IMAP_PASS")
 smtp_host_xml=$(xml_escape "$SMTP_HOST")
 smtp_user_xml=$(xml_escape "$SMTP_USER")
+smtp_pass_xml=$(xml_escape "$SMTP_PASS")
+
+incoming_password_block=""
+if [ -n "$IMAP_PASS" ]; then
+  incoming_password_block="      <key>IncomingPassword</key>
+      <string>$imap_pass_xml</string>"
+fi
+
+outgoing_password_block=""
+if [ -n "$SMTP_PASS" ]; then
+  outgoing_password_block="      <key>OutgoingPassword</key>
+      <string>$smtp_pass_xml</string>"
+fi
 
 mkdir -p "$OUT_DIR"
 profile_path="$OUT_DIR/$safe_name.mobileconfig"
@@ -103,6 +119,7 @@ cat > "$profile_path" <<EOF
       <string>$email_xml</string>
       <key>IncomingMailServerAuthentication</key>
       <string>EmailAuthPassword</string>
+${incoming_password_block}
       <key>IncomingMailServerHostName</key>
       <string>$imap_host_xml</string>
       <key>IncomingMailServerPortNumber</key>
@@ -113,6 +130,7 @@ cat > "$profile_path" <<EOF
       <string>$imap_user_xml</string>
       <key>OutgoingMailServerAuthentication</key>
       <string>EmailAuthPassword</string>
+${outgoing_password_block}
       <key>OutgoingMailServerHostName</key>
       <string>$smtp_host_xml</string>
       <key>OutgoingMailServerPortNumber</key>
