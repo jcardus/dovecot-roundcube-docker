@@ -2,16 +2,19 @@
 set -eu
 
 # Generates an Apple Mail configuration profile for iPhone/iPad.
-# Usage: ./generate-ios-profile.sh user@example.com [Full Name]
+# Usage: ./generate-ios-profile.sh user@example.com [Full Name] [Profile Name] [Organization] [IMAP Password]
 
 EMAIL="${1:-}"
 FULL_NAME="${2:-$EMAIL}"
+PROFILE_NAME="${3:-${PROFILE_NAME:-Fleetmap Mail}}"
+ORGANIZATION="${4:-${ORGANIZATION:-Fleetmap}}"
+IMAP_PASS_ARG="${5:-}"
 OUT_DIR="${OUT_DIR:-ios-profiles}"
 IMAP_HOST="${IMAP_HOST:-mail.fleetmap.org}"
 IMAP_PORT="${IMAP_PORT:-993}"
 IMAP_SSL="${IMAP_SSL:-true}"
 IMAP_USER="${IMAP_USER:-$EMAIL}"
-IMAP_PASS="${IMAP_PASS:-}"
+IMAP_PASS="${IMAP_PASS:-$IMAP_PASS_ARG}"
 SMTP_HOST="${SMTP_HOST:-email-smtp.us-east-1.amazonaws.com}"
 SMTP_PORT="${SMTP_PORT:-465}"
 SMTP_SSL="${SMTP_SSL:-true}"
@@ -19,9 +22,10 @@ SMTP_USER="${SMTP_USER:-$EMAIL}"
 SMTP_PASS="${SMTP_PASS:-}"
 
 if [ -z "$EMAIL" ]; then
-  echo "Usage: $0 user@example.com [Full Name]"
+  echo "Usage: $0 user@example.com [Full Name] [Profile Name] [Organization] [IMAP Password]"
   echo
   echo "Optional environment variables:"
+  echo "  PROFILE_NAME='Fleetmap Mail' ORGANIZATION=Fleetmap"
   echo "  OUT_DIR=ios-profiles"
   echo "  IMAP_HOST=mail.fleetmap.org IMAP_PORT=993 IMAP_SSL=true IMAP_USER=user@example.com IMAP_PASS=secret"
   echo "  SMTP_HOST=email-smtp.us-east-1.amazonaws.com SMTP_PORT=465 SMTP_SSL=true SMTP_USER=ses-smtp-user SMTP_PASS=secret"
@@ -69,6 +73,8 @@ mail_uuid=$(make_uuid)
 
 email_xml=$(xml_escape "$EMAIL")
 full_name_xml=$(xml_escape "$FULL_NAME")
+profile_name_xml=$(xml_escape "$PROFILE_NAME")
+organization_xml=$(xml_escape "$ORGANIZATION")
 imap_host_xml=$(xml_escape "$IMAP_HOST")
 imap_user_xml=$(xml_escape "$IMAP_USER")
 imap_pass_xml=$(xml_escape "$IMAP_PASS")
@@ -90,6 +96,9 @@ fi
 
 mkdir -p "$OUT_DIR"
 profile_path="$OUT_DIR/$safe_name.mobileconfig"
+cat > "$OUT_DIR/.htaccess" <<EOF
+AddType application/x-apple-aspen-config .mobileconfig
+EOF
 
 cat > "$profile_path" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -150,11 +159,11 @@ ${outgoing_password_block}
   <key>PayloadDescription</key>
   <string>Configures the Mail account for $email_xml.</string>
   <key>PayloadDisplayName</key>
-  <string>Fleetmap Mail - $email_xml</string>
+  <string>$profile_name_xml - $email_xml</string>
   <key>PayloadIdentifier</key>
   <string>org.fleetmap.mail.$safe_id</string>
   <key>PayloadOrganization</key>
-  <string>Fleetmap</string>
+  <string>$organization_xml</string>
   <key>PayloadRemovalDisallowed</key>
   <false/>
   <key>PayloadType</key>

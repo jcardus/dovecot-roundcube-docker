@@ -18,6 +18,7 @@ services:
     container_name: roundcube
     volumes:
       - ./roundcube/:/var/roundcube/config/
+      - ./ios-profiles:/var/www/html/profiles:ro
       - ../vmail:/srv/vmail
     environment:
       - ROUNDCUBEMAIL_DEFAULT_HOST=dovecot
