@@ -60,6 +60,19 @@ password in the `.mobileconfig`, so treat the generated file as a secret:
 SMTP_USER=your-ses-smtp-user SMTP_PASS='your-ses-smtp-password' ./generate-ios-profile.sh user@fleetmap.org "User Name"
 ```
 
+To sign the profile, pass a certificate and private key. Use a certificate that
+the iPhone trusts; otherwise iOS will still show it as untrusted:
+
+```sh
+SIGN_CERT=/path/to/cert.pem SIGN_KEY=/path/to/key.pem ./generate-ios-profile.sh user@fleetmap.org "User Name"
+```
+
+If your signing certificate needs an intermediate chain:
+
+```sh
+SIGN_CERT=/path/to/cert.pem SIGN_KEY=/path/to/key.pem SIGN_CERT_CHAIN=/path/to/chain.pem ./generate-ios-profile.sh user@fleetmap.org "User Name"
+```
+
 The default profile matches the current `autodiscover.xml`:
 
 ```text

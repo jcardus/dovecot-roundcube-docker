@@ -20,6 +20,9 @@ SMTP_PORT="${SMTP_PORT:-465}"
 SMTP_SSL="${SMTP_SSL:-true}"
 SMTP_USER="${SMTP_USER:-$EMAIL}"
 SMTP_PASS="${SMTP_PASS:-}"
+SIGN_CERT="${SIGN_CERT:-}"
+SIGN_KEY="${SIGN_KEY:-}"
+SIGN_CERT_CHAIN="${SIGN_CERT_CHAIN:-}"
 
 if [ -z "$EMAIL" ]; then
   echo "Usage: $0 user@example.com [Full Name] [Profile Name] [Organization] [IMAP Password]"
@@ -29,6 +32,7 @@ if [ -z "$EMAIL" ]; then
   echo "  OUT_DIR=ios-profiles"
   echo "  IMAP_HOST=mail.fleetmap.org IMAP_PORT=993 IMAP_SSL=true IMAP_USER=user@example.com IMAP_PASS=secret"
   echo "  SMTP_HOST=email-smtp.us-east-1.amazonaws.com SMTP_PORT=465 SMTP_SSL=true SMTP_USER=ses-smtp-user SMTP_PASS=secret"
+  echo "  SIGN_CERT=/path/to/cert.pem SIGN_KEY=/path/to/key.pem SIGN_CERT_CHAIN=/path/to/chain.pem"
   exit 1
 fi
 
@@ -96,11 +100,12 @@ fi
 
 mkdir -p "$OUT_DIR"
 profile_path="$OUT_DIR/$safe_name.mobileconfig"
+unsigned_profile_path="$OUT_DIR/$safe_name.unsigned.mobileconfig"
 cat > "$OUT_DIR/.htaccess" <<EOF
 AddType application/x-apple-aspen-config .mobileconfig
 EOF
 
-cat > "$profile_path" <<EOF
+cat > "$unsigned_profile_path" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -175,6 +180,38 @@ ${outgoing_password_block}
 </dict>
 </plist>
 EOF
+
+if [ -n "$SIGN_CERT" ] || [ -n "$SIGN_KEY" ]; then
+  if [ -z "$SIGN_CERT" ] || [ -z "$SIGN_KEY" ]; then
+    echo "SIGN_CERT and SIGN_KEY must both be set to sign the profile"
+    exit 1
+  fi
+
+  if [ -n "$SIGN_CERT_CHAIN" ]; then
+    openssl smime \
+      -sign \
+      -in "$unsigned_profile_path" \
+      -out "$profile_path" \
+      -signer "$SIGN_CERT" \
+      -inkey "$SIGN_KEY" \
+      -certfile "$SIGN_CERT_CHAIN" \
+      -outform der \
+      -nodetach
+  else
+    openssl smime \
+      -sign \
+      -in "$unsigned_profile_path" \
+      -out "$profile_path" \
+      -signer "$SIGN_CERT" \
+      -inkey "$SIGN_KEY" \
+      -outform der \
+      -nodetach
+  fi
+  rm -f "$unsigned_profile_path"
+  echo "Signed $profile_path"
+else
+  mv "$unsigned_profile_path" "$profile_path"
+fi
 
 echo "Created $profile_path"
 echo "Send it to the iPhone, open it, then install it in Settings > Profile Downloaded."
