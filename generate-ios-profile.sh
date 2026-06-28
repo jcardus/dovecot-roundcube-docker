@@ -117,7 +117,7 @@ cat > "$profile_path" <<EOF
       <key>PayloadUUID</key>
       <string>$mail_uuid</string>
       <key>PayloadDisplayName</key>
-      <string>Mail - $email_xml</string>
+      <string>$profile_name_xml - $email_xml</string>
       <key>EmailAccountDescription</key>
       <string>$email_xml</string>
       <key>EmailAccountName</key>
