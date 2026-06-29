@@ -13,8 +13,8 @@
       </Protocol>
       <Protocol>
         <Type>SMTP</Type>
-        <Server>email-smtp.us-east-1.amazonaws.com</Server>
-        <Port>465</Port>
+        <Server>mail.fleetmap.org</Server>
+        <Port>587</Port>
         <LoginName>%EMAILADDRESS%</LoginName>
         <SSL>1</SSL>
       </Protocol>

@@ -2,6 +2,27 @@
 
 With cloudflare mail worker and some smtp provider (like SES) this is a complete email solution.
 
+## SMTP submission
+
+Postfix listens on port `587` for authenticated SMTP submission. It uses
+Dovecot SASL, so users sign in with the same username/password used for IMAP.
+Postfix relays outbound mail through SES with server-side credentials:
+
+```sh
+POSTFIX_RELAY_USER=your-ses-smtp-user \
+POSTFIX_RELAY_PASS='your-ses-smtp-password' \
+docker compose up -d dovecot postfix
+```
+
+If `POSTFIX_RELAY_USER` and `POSTFIX_RELAY_PASS` are not set, Postfix falls
+back to the existing `SMTP_USER` and `SMTP_PASS` environment variables.
+
+Point clients at:
+
+```text
+SMTP: mail.fleetmap.org:587, SSL on
+```
+
 ## Configure iPhone Mail
 
 The easiest setup is to generate an Apple configuration profile and send it to
@@ -60,6 +81,10 @@ password in the `.mobileconfig`, so treat the generated file as a secret:
 SMTP_USER=your-ses-smtp-user SMTP_PASS='your-ses-smtp-password' ./generate-ios-profile.sh user@fleetmap.org "User Name"
 ```
 
+By default, the profile uses `mail.fleetmap.org:587` and reuses the incoming
+mail password for outgoing mail. Use `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, and
+`SMTP_PASS` only when you want to bypass the local Postfix submission service.
+
 To sign the profile, pass a certificate and private key. Use a certificate that
 the iPhone trusts; otherwise iOS will still show it as untrusted:
 
@@ -77,5 +102,5 @@ The default profile matches the current `autodiscover.xml`:
 
 ```text
 IMAP: mail.fleetmap.org:993, SSL on
-SMTP: email-smtp.us-east-1.amazonaws.com:465, SSL on
+SMTP: mail.fleetmap.org:587, SSL on
 ```

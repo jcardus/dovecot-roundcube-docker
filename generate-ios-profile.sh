@@ -15,8 +15,8 @@ IMAP_PORT="${IMAP_PORT:-993}"
 IMAP_SSL="${IMAP_SSL:-true}"
 IMAP_USER="${IMAP_USER:-$EMAIL}"
 IMAP_PASS="${IMAP_PASS:-$IMAP_PASS_ARG}"
-SMTP_HOST="${SMTP_HOST:-email-smtp.us-east-1.amazonaws.com}"
-SMTP_PORT="${SMTP_PORT:-465}"
+SMTP_HOST="${SMTP_HOST:-mail.fleetmap.org}"
+SMTP_PORT="${SMTP_PORT:-587}"
 SMTP_SSL="${SMTP_SSL:-true}"
 SMTP_USER="${SMTP_USER:-$EMAIL}"
 SMTP_PASS="${SMTP_PASS:-}"
@@ -31,7 +31,7 @@ if [ -z "$EMAIL" ]; then
   echo "  PROFILE_NAME='Fleetmap Mail' ORGANIZATION=Fleetmap"
   echo "  OUT_DIR=ios-profiles"
   echo "  IMAP_HOST=mail.fleetmap.org IMAP_PORT=993 IMAP_SSL=true IMAP_USER=user@example.com IMAP_PASS=secret"
-  echo "  SMTP_HOST=email-smtp.us-east-1.amazonaws.com SMTP_PORT=465 SMTP_SSL=true SMTP_USER=ses-smtp-user SMTP_PASS=secret"
+  echo "  SMTP_HOST=mail.fleetmap.org SMTP_PORT=587 SMTP_SSL=true SMTP_USER=user@example.com SMTP_PASS=secret"
   echo "  SIGN_CERT=/path/to/cert.pem SIGN_KEY=/path/to/key.pem SIGN_CERT_CHAIN=/path/to/chain.pem"
   exit 1
 fi
@@ -93,9 +93,11 @@ if [ -n "$IMAP_PASS" ]; then
 fi
 
 outgoing_password_block=""
+outgoing_same_password=true
 if [ -n "$SMTP_PASS" ]; then
   outgoing_password_block="      <key>OutgoingPassword</key>
       <string>$smtp_pass_xml</string>"
+  outgoing_same_password=false
 fi
 
 mkdir -p "$OUT_DIR"
@@ -154,7 +156,7 @@ ${outgoing_password_block}
       <key>OutgoingMailServerUsername</key>
       <string>$smtp_user_xml</string>
       <key>OutgoingPasswordSameAsIncomingPassword</key>
-      <false/>
+      <$outgoing_same_password/>
       <key>PreventMove</key>
       <false/>
       <key>PreventAppSheet</key>

@@ -6,12 +6,35 @@ services:
       - ./dovecot/conf.d:/etc/dovecot/conf.d
       - ../vmail:/srv/vmail
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - dovecot-auth:/var/spool/postfix/private
     environment:
       - USER_PASSWORD=${USER_PASSWORD}
     ports:
       - "31143:31143"
       - "993:993"
     user: root
+
+  postfix:
+    build:
+      context: ./postfix
+    container_name: postfix
+    volumes:
+      - dovecot-auth:/var/spool/postfix/private
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    environment:
+      - POSTFIX_MYHOSTNAME=${POSTFIX_MYHOSTNAME:-mail.fleetmap.org}
+      - POSTFIX_MYDOMAIN=${POSTFIX_MYDOMAIN:-fleetmap.org}
+      - POSTFIX_RELAY_HOST=${POSTFIX_RELAY_HOST:-[email-smtp.us-east-1.amazonaws.com]:587}
+      - POSTFIX_RELAY_USER=${POSTFIX_RELAY_USER}
+      - POSTFIX_RELAY_PASS=${POSTFIX_RELAY_PASS}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - POSTFIX_TLS_CERT_FILE=${POSTFIX_TLS_CERT_FILE:-/etc/letsencrypt/live/mail.fleetmap.org/fullchain.pem}
+      - POSTFIX_TLS_KEY_FILE=${POSTFIX_TLS_KEY_FILE:-/etc/letsencrypt/live/mail.fleetmap.org/privkey.pem}
+    ports:
+      - "587:587"
+    depends_on:
+      - dovecot
 
   roundcube:
     image: roundcube/roundcubemail
@@ -41,3 +64,6 @@ services:
       - "8080:8080"
     depends_on:
       - dovecot
+
+volumes:
+  dovecot-auth:
