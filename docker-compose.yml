@@ -41,6 +41,7 @@ services:
     container_name: roundcube
     volumes:
       - ./roundcube/:/var/roundcube/config/
+      - ./autodiscover:/var/www/html/autodiscover:ro
       - ./ios-profiles:/var/www/html/profiles:ro
       - ../vmail:/srv/vmail
     environment:

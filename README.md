@@ -67,6 +67,12 @@ https://webmail.fleetmap.org/profiles/user@fleetmap.org.mobileconfig
 
 Delete profiles after installation if they contain passwords.
 
+Roundcube also serves mail autodiscover settings from:
+
+```text
+https://webmail.fleetmap.org/autodiscover/autodiscover.xml
+```
+
 If your SMTP username is different from the email address, pass it as an
 environment variable:
 
@@ -98,7 +104,7 @@ If your signing certificate needs an intermediate chain:
 SIGN_CERT=/path/to/cert.pem SIGN_KEY=/path/to/key.pem SIGN_CERT_CHAIN=/path/to/chain.pem ./generate-ios-profile.sh user@fleetmap.org "User Name"
 ```
 
-The default profile matches the current `autodiscover.xml`:
+The default profile matches the current `autodiscover/autodiscover.xml`:
 
 ```text
 IMAP: mail.fleetmap.org:993, SSL on
