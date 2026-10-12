@@ -12,6 +12,6 @@ RUN apt-get update \
 COPY entrypoint.sh /usr/local/bin/postfix-entrypoint
 RUN chmod +x /usr/local/bin/postfix-entrypoint
 
-EXPOSE 587
+EXPOSE 587 465
 
 CMD ["/usr/local/bin/postfix-entrypoint"]

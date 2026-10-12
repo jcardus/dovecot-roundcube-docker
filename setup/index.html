@@ -61,9 +61,10 @@
       <tr><th></th><th>Server</th><th>Port</th><th>Security</th></tr>
       <tr><td><strong>Incoming (IMAP)</strong></td><td><code>mail.fleetmap.org</code></td><td>993</td><td>SSL/TLS</td></tr>
       <tr><td><strong>Outgoing (SMTP)</strong></td><td><code>mail.fleetmap.org</code></td><td>587</td><td>STARTTLS, password required</td></tr>
+      <tr><td><strong>Outgoing (alternative)</strong></td><td><code>mail.fleetmap.org</code></td><td>465</td><td>SSL/TLS, password required</td></tr>
     </table>
     </div>
-    <p class="note">Do not use <code>imap.yourdomain.com</code> or <code>smtp.yourdomain.com</code>, even if your app suggests them.</p>
+    <p class="note">Do not use <code>imap.yourdomain.com</code> or <code>smtp.yourdomain.com</code>, even if your app suggests them. If sending fails on some networks (e.g. “sender address not valid”), use port 465 with SSL/TLS instead.</p>
   </section>
 
   <section>

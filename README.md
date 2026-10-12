@@ -4,7 +4,8 @@ With cloudflare mail worker and some smtp provider (like SES) this is a complete
 
 ## SMTP submission
 
-Postfix listens on port `587` for authenticated SMTP submission. It uses
+Postfix listens on port `587` (STARTTLS) and `465` (implicit TLS) for
+authenticated SMTP submission. Use `465` on networks that strip STARTTLS. It uses
 Dovecot SASL, so users sign in with the same username/password used for IMAP.
 Postfix relays outbound mail through SES with server-side credentials:
 
