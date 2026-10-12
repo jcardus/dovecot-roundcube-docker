@@ -29,6 +29,7 @@ postconf -e "mydestination ="
 postconf -e "relayhost = $POSTFIX_RELAY_HOST"
 postconf -e "mynetworks = 127.0.0.0/8"
 postconf -e "smtpd_banner = \$myhostname ESMTP"
+postconf -e "maillog_file = /dev/stdout"
 
 postconf -e "smtpd_tls_cert_file = $POSTFIX_TLS_CERT_FILE"
 postconf -e "smtpd_tls_key_file = $POSTFIX_TLS_KEY_FILE"
