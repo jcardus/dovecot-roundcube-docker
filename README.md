@@ -23,6 +23,14 @@ Point clients at:
 SMTP: mail.fleetmap.org:587, SSL on
 ```
 
+The Postfix queue lives in the `postfix-spool` volume, so deferred mail
+survives redeploys.
+
+## Certificate renewal
+
+`run.sh` installs `certbot/reload-mail.sh` as a certbot deploy hook, so Dovecot
+and Postfix restart and load the new certificate whenever it is renewed.
+
 ## Configure iPhone Mail
 
 The easiest setup is to generate an Apple configuration profile and send it to

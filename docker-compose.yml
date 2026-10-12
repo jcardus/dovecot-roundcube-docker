@@ -19,6 +19,7 @@ services:
       context: ./postfix
     container_name: postfix
     volumes:
+      - postfix-spool:/var/spool/postfix
       - dovecot-auth:/var/spool/postfix/private
       - /etc/letsencrypt:/etc/letsencrypt:ro
     environment:
@@ -69,3 +70,4 @@ services:
 
 volumes:
   dovecot-auth:
+  postfix-spool:
