@@ -42,6 +42,7 @@ services:
     volumes:
       - ./roundcube/:/var/roundcube/config/
       - ./autodiscover:/var/www/html/autodiscover:ro
+      - ./setup:/var/www/html/setup:ro
       - ./ios-profiles:/var/www/html/profiles:ro
       - ../vmail:/srv/vmail
     environment:

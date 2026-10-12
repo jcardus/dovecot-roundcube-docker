@@ -73,6 +73,12 @@ Roundcube also serves mail autodiscover settings from:
 https://webmail.fleetmap.org/autodiscover/autodiscover.xml
 ```
 
+Send users the setup page with the IMAP/SMTP settings for any mail app:
+
+```text
+https://webmail.fleetmap.org/setup/
+```
+
 If your SMTP username is different from the email address, pass it as an
 environment variable:
 

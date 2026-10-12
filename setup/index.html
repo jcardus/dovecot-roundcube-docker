@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mail Setup</title>
+<style>
+  :root {
+    --bg: #f7f7f8; --card: #ffffff; --text: #1c1c1e; --muted: #6b6b70;
+    --border: #e2e2e6; --accent: #2f6fdb; --code-bg: #f0f1f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141416; --card: #1d1d20; --text: #ececee; --muted: #9a9aa0;
+      --border: #2e2e33; --accent: #6b9cf0; --code-bg: #26262b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 1.8rem; margin: 0 0 4px; }
+  h2 { font-size: 1.2rem; margin: 0 0 12px; }
+  p.lead { color: var(--muted); margin: 0 0 24px; }
+  section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; margin-bottom: 16px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; font-size: .9rem; }
+  tr:last-child td { border-bottom: none; }
+  code { background: var(--code-bg); padding: 2px 6px; border-radius: 5px; font-size: .92em; word-break: break-all; }
+  ol { padding-left: 20px; margin: 0; }
+  li { margin-bottom: 6px; }
+  .note { color: var(--muted); font-size: .92rem; margin: 12px 0 0; }
+  a { color: var(--accent); }
+  .table-wrap { overflow-x: auto; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mail setup</h1>
+  <p class="lead">Settings for adding your mailbox to Outlook, iPhone, Android or any other mail app.</p>
+
+  <section>
+    <h2>Your login</h2>
+    <table>
+      <tr><th>Username</th><td>Your <strong>full email address</strong>, e.g. <code>name@yourdomain.com</code></td></tr>
+      <tr><th>Password</th><td>The same password you use for <a href="https://webmail.fleetmap.org">webmail</a></td></tr>
+    </table>
+    <p class="note">Use the same username and password for both incoming and outgoing mail.</p>
+  </section>
+
+  <section>
+    <h2>Server settings</h2>
+    <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Server</th><th>Port</th><th>Security</th></tr>
+      <tr><td><strong>Incoming (IMAP)</strong></td><td><code>mail.fleetmap.org</code></td><td>993</td><td>SSL/TLS</td></tr>
+      <tr><td><strong>Outgoing (SMTP)</strong></td><td><code>mail.fleetmap.org</code></td><td>587</td><td>STARTTLS, password required</td></tr>
+    </table>
+    </div>
+    <p class="note">Do not use <code>imap.yourdomain.com</code> or <code>smtp.yourdomain.com</code>, even if your app suggests them.</p>
+  </section>
+
+  <section>
+    <h2>Outlook</h2>
+    <ol>
+      <li>Add account, enter your email address, and choose <strong>IMAP</strong>.</li>
+      <li>Turn on <strong>Show more</strong> and turn <strong>off</strong> “Use recommended settings”.</li>
+      <li>Enter the incoming and outgoing servers from the table above.</li>
+      <li>Enter your password and continue.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>iPhone / iPad</h2>
+    <p>If you were sent a profile link, open it in Safari, then install it from <strong>Settings → Profile Downloaded</strong>.</p>
+    <p>To set it up by hand:</p>
+    <ol>
+      <li>Settings → Apps → Mail → Mail Accounts → Add Account → Other → Add Mail Account.</li>
+      <li>Choose <strong>IMAP</strong> and enter the servers from the table above.</li>
+      <li>After saving, open the account → <strong>SMTP</strong> → <code>mail.fleetmap.org</code> and check that the username and password are filled in and Authentication is <strong>Password</strong>.</li>
+    </ol>
+    <p class="note">If sending fails with “not a valid address … rejected by the server”, the outgoing password is missing.</p>
+  </section>
+
+  <section>
+    <h2>Android and other apps</h2>
+    <p>Choose <strong>Other</strong> / <strong>IMAP</strong> / <strong>Manual setup</strong> and enter the settings above.</p>
+  </section>
+</main>
+</body>
+</html>
