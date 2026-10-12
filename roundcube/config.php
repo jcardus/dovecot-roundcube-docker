@@ -30,4 +30,4 @@ $config['password_algorithm'] = 'sha512-crypt';
 $config['password_algorithm_prefix'] = '{SHA512-CRYPT}';
 
 // "Get support" link on the login page and in About
-$config['support_url'] = '/setup/index.html';
+$config['support_url'] = 'https://webmail.fleetmap.org/setup/index.html';
