@@ -84,7 +84,7 @@ https://webmail.fleetmap.org/autodiscover/autodiscover.xml
 Send users the setup page with the IMAP/SMTP settings for any mail app:
 
 ```text
-https://webmail.fleetmap.org/setup/
+https://webmail.fleetmap.org/setup/index.html
 ```
 
 If your SMTP username is different from the email address, pass it as an
