@@ -22,7 +22,7 @@ $config['oidc_scope'] = 'openid email';
 // Field for login UID. This may be an email ID
 $config['oidc_field_uid'] = 'email';
 
-$config['plugins'] = array('password');
+$config['plugins'] = array('password', 'setup_link');
 
 $config['password_driver'] = 'dovecot_passwdfile';
 $config['password_dovecot_passwdfile_path'] = '/srv/vmail/passwd';

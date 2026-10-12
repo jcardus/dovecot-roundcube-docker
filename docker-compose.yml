@@ -44,6 +44,7 @@ services:
       - ./roundcube/:/var/roundcube/config/
       - ./autodiscover:/var/www/html/autodiscover:ro
       - ./setup:/var/www/html/setup:ro
+      - ./roundcube/plugins/setup_link:/var/www/html/plugins/setup_link:ro
       - ./ios-profiles:/var/www/html/profiles:ro
       - ../vmail:/srv/vmail
     environment:
