@@ -56,4 +56,7 @@ postconf -P "submission/inet/smtpd_sasl_auth_enable=yes"
 postconf -P "submission/inet/smtpd_relay_restrictions=permit_sasl_authenticated,reject"
 postconf -P "submission/inet/smtpd_recipient_restrictions=permit_sasl_authenticated,reject"
 
+# start-fg does not populate the chroot (resolv.conf etc.), so DNS fails inside it
+postconf -F "*/*/chroot = n"
+
 exec postfix start-fg
