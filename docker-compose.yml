@@ -10,6 +10,7 @@ services:
     environment:
       - USER_PASSWORD=${USER_PASSWORD}
     ports:
+      - "31143:31143"
       - "993:993"
     user: root
 
